@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Event Requets";
+}
+
+<div>
+    <form method="post" asp-controller="EventRequests" asp-action="create">
+        <p>Record Number:</p>
+        <input type="text" name="recordnumber" /> <br />
+        <p>Client Name:</p>
+        <input type="text" name="clientname" /> <br />
+        <p>Event Name:</p>
+        <input type="text" name="eventname" /> <br />
+        <p>Event Type:</p>
+        <input type="text" name="eventtype" /> <br />
+        <p>From:</p>
+        <input type="text" name="from" /> <br />
+        <p>To:</p>
+        <input type="text" name="to" /> <br />
+        <p>Expected Number of Attendees:</p>
+        <input type="text" name="attendance" /> <br />
+        <p>Preferences:</p>
+        <input type="checkbox" id="decoration_cb" name="decoration" />
+        <label for="decoration_cb">Decoration</label> <br />
+
+        <input type="checkbox" id="food_cb" name="food" />
+        <label for="food_cb">Breakfast, lunch, dinner</label> <br />
+
+        <input type="checkbox" id="filmphoto_cb" name="filmphoto" />
+        <label for="filmphoto_cb">Photos/Filming</label> <br />
+
+        <input type="checkbox" id="music_cb" name="music"  />
+        <label for="music_cb">Music</label> <br />
+
+        <input type="checkbox" id="poster_cb" name="poster" />
+        <label for="poster_cb">Poster</label> <br />
+
+        <p>Budget:</p>
+        <input type="text" name="budget" /> <br />
+
+        <input type="submit" value="Create">
+    </form>
+</div>

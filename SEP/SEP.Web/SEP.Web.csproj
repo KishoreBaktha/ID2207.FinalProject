@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+    <Folder Include="Views\Login\" />
+    <Folder Include="Services\" />
+    <Folder Include="Views\EventRequests\" />
+    <Folder Include="Views\FinancialRequests\" />
+    <Folder Include="Views\ResourceRequests\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Views\Login\index.cshtml" />
+    <Content Remove="Views\EventRequests\index.cshtml" />
+    <Content Remove="Views\EventRequests\index %28copy%29.cshtml" />
+    <Content Remove="Views\EventRequests\index %28another copy%29.cshtml" />
+    <Content Remove="Views\FinancialRequests\Create.cshtml" />
+    <Content Remove="Views\FinancialRequests\index.cshtml" />
+    <Content Remove="Views\FinancialRequests\ViewDetails.cshtml" />
+    <Content Remove="Views\FinancialRequests %28copy%29\Create.cshtml" />
+    <Content Remove="Views\FinancialRequests %28copy%29\index.cshtml" />
+    <Content Remove="Views\FinancialRequests %28copy%29\ViewDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Login\index.cshtml" />
+    <None Include="Views\EventRequests\index.cshtml" />
+    <None Include="Views\EventRequests\ViewDetails.cshtml" />
+    <None Include="Views\EventRequests\Create.cshtml" />
+    <None Include="Views\FinancialRequests\Create.cshtml" />
+    <None Include="Views\FinancialRequests\index.cshtml" />
+    <None Include="Views\FinancialRequests\ViewDetails.cshtml" />
+    <None Include="Views\ResourceRequests\Create.cshtml" />
+    <None Include="Views\ResourceRequests\index.cshtml" />
+    <None Include="Views\ResourceRequests\ViewDetails.cshtml" />
+  </ItemGroup>
+</Project>
