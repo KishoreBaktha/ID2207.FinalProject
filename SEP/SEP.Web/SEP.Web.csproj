@@ -27,17 +27,19 @@
     <Content Remove="Views\FinancialRequests %28copy%29\Create.cshtml" />
     <Content Remove="Views\FinancialRequests %28copy%29\index.cshtml" />
     <Content Remove="Views\FinancialRequests %28copy%29\ViewDetails.cshtml" />
+    <Content Remove="Services\Create.cshtml" />
+    <Content Remove="Views\EventRequests\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Views\Login\index.cshtml" />
     <None Include="Views\EventRequests\index.cshtml" />
     <None Include="Views\EventRequests\ViewDetails.cshtml" />
-    <None Include="Views\EventRequests\Create.cshtml" />
     <None Include="Views\FinancialRequests\Create.cshtml" />
     <None Include="Views\FinancialRequests\index.cshtml" />
     <None Include="Views\FinancialRequests\ViewDetails.cshtml" />
     <None Include="Views\ResourceRequests\Create.cshtml" />
     <None Include="Views\ResourceRequests\index.cshtml" />
     <None Include="Views\ResourceRequests\ViewDetails.cshtml" />
+    <None Include="Views\EventRequests\Create.cshtml" />
   </ItemGroup>
 </Project>

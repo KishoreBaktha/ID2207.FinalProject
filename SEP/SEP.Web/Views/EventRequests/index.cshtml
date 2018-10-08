@@ -1,3 +1,29 @@
 ﻿@{
     ViewData["Title"] = "Event Requets";
 }
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Client Name</th>
+            <th>Type</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{   
+            var eventRequests = ViewData["EventRequests"] as List<EventRequest>;
+
+            foreach (EventRequest eventRequest in eventRequests)
+            {
+               <tr >
+                <td><a href="/eventrequests/@eventRequest.Id">@eventRequest.EventName</a></td>
+                <td>@eventRequest.ClientName</td>
+                <td>@eventRequest.EventType</td>
+                <td>@eventRequest.EventStatus</td>
+               </tr>
+            }
+        }
+    </tbody>
+</table>

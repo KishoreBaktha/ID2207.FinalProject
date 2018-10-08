@@ -23,7 +23,7 @@ namespace SEP.Web.Controllers
         [HttpPost]
         public IActionResult Login(string username, string password)
         {
-			var employee = employeeService.GetEmployee(username, password);
+			var employee = employeeService.ValidateCredential(username, password);
 
 			if (employee != null)
 			{

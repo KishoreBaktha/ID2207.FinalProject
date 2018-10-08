@@ -1,3 +1,77 @@
 ﻿@{
     ViewData["Title"] = "Event Requets";
 }
+
+<div>
+    @{  var eventRequest = ViewData["EventRequest"] as EventRequest;
+       
+    }
+    <form method="post" asp-controller="EventRequests" asp-action="update">
+        <input type="hidden" name="id" value="@eventRequest.Id" />
+        <p>Record Number:</p>
+        <input type="text" name="recordnumber" /> <br />
+        <p>Client Name:</p>
+        <input type="text" name="clientname" value="@eventRequest.ClientName" /> <br />
+        <p>Event Name:</p>
+        <input type="text" name="eventname" value="@eventRequest.EventName" /> <br />
+        <p>Event Type:</p>
+        <input type="text" name="eventtype" value="@eventRequest.EventType" /> <br />
+        <p>From:</p>
+        <input type="text" name="from" value="@eventRequest.From" /> <br />
+        <p>To:</p>
+        <input type="text" name="to" value="@eventRequest.To" /> <br />
+        <p>Expected Number of Attendees:</p>
+        <input type="text" name="attendance" value="@eventRequest.Attendance" /> <br />
+
+        <p>Budget:</p>
+        <input type="text" name="budget" /> <br />
+
+        <p>Preferences:</p>
+
+        @{ if (eventRequest.Decoration)
+        {
+            <p>Decoration</p>
+            <textarea name="decorationdescription">@eventRequest.DecorationDescription</textarea>
+    }
+        }
+
+        @{ if (eventRequest.Food)
+        {
+            <p>Food</p>
+            <textarea name="fooddescription">@eventRequest.FoodDescription</textarea>
+    }
+        }
+
+        @{ if (eventRequest.Music)
+        {
+            <p>Music</p>
+            <textarea name="musicdescription">@eventRequest.MusicDescription</textarea>
+    }
+        }
+
+        @{ if (eventRequest.FilmPhoto)
+        {
+            <p>Film/Photo</p>
+            <textarea name="filmphotodescription">@eventRequest.FilmPhotoDescription</textarea>
+    }
+        }
+
+        @{ if (eventRequest.Poster)
+        {
+            <p>Poster</p>
+            <textarea name="posterdescription">@eventRequest.PosterDescription</textarea>
+    }
+        }
+        <p>Computer-related issues</p>
+        <textarea name="computerissue">
+            @eventRequest.ComputerIssue
+        </textarea>
+
+        <p>Other needs</p>
+        <textarea name="extrarequirement">
+            @eventRequest.ExtraRequirement
+        </textarea>
+
+        <input type="submit" value="Update">
+    </form>
+</div>

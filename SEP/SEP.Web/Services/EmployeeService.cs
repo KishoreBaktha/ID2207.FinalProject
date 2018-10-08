@@ -11,13 +11,22 @@ namespace SEP.Web.Services
         {
         }
 
-        public Employee GetEmployee(string username, string password)
+        public Employee ValidateCredential(string username, string password)
 		{
 			return Database
 				.Employees
 				.FirstOrDefault(e => 
 				                e.Username == username && 
 				                e.Password == password);
+		}
+
+        public Employee GetEmployee(string username)
+		{
+			return Database
+                .Employees
+                .FirstOrDefault(e =>
+                                e.Username == username);
+            
 		}
     }
 }
