@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using SEP.Web.Models;
 using SEP.Web.Repositories;
 
@@ -12,6 +14,9 @@ namespace SEP.Web.Services
 			int experience,
 			string jobTitle,
 			string jobDescription);
+
+		List<ResourceRequest> GetResourceRequests();
+		ResourceRequest GetResourceRequest(string id);
 	}
 
 	public class ResourceRequestsService: IResourceRequestsService
@@ -23,6 +28,21 @@ namespace SEP.Web.Services
 			this.userContext = userContext;
         }
 
+		public List<ResourceRequest> GetResourceRequests()
+        {
+			if (userContext.CurrentUser.Role == EmployeeRole.HRManager)
+				return Database.ResourceRequests;
+
+			return Database.ResourceRequests
+                           .Where(x => x.CreatedBy == userContext.CurrentUser)
+                           .ToList();
+        }
+
+		public ResourceRequest GetResourceRequest(string id)
+        {
+			return Database.ResourceRequests.FirstOrDefault(x => x.Id == id);
+        }
+
 		public ResourceRequest CreateResourceRequest(
 			string department, 
 			ContractType contractType, 
@@ -32,7 +52,7 @@ namespace SEP.Web.Services
 		{
 			var newResourceRequest = new ResourceRequest { 
 				Id = Guid.NewGuid().ToString(),
-				RequestingDepartment = department,
+				Department = department,
 				YearsOfExperience = experience,
 				ContractType = contractType,
 				JobTitle = jobTitle,

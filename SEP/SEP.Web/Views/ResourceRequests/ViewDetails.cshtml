@@ -1,3 +1,26 @@
 ﻿@{
-    ViewData["Title"] = "Event Requets";
+    ViewData["Title"] = "Resource Requests";
 }
+
+<div>
+    @{  var resourceRequest = ViewData["ResourceRequest"] as ResourceRequest;
+    var currentUser = ViewData["CurrentUser"] as Employee;
+    }
+    <form method="post" asp-controller="FinancialRequests" asp-action="create">
+        <p>Requesting Department: @resourceRequest.Department</p>
+
+        <p>Contract Type: @resourceRequest.ContractType.ToString()</p>
+        <p>Years Of Experience: @resourceRequest.YearsOfExperience</p>
+        <p>Job Title: @resourceRequest.JobTitle</p>
+        <p>
+            Job Description <br />
+            @resourceRequest.JobDescription
+        </p>
+        @{  if (currentUser.Role == EmployeeRole.HRManager)
+        {
+        <input type="submit" value="Approve" /><br />
+        <input type="submit" value="Reject" /><br />
+        }
+        }
+    </form>
+</div>

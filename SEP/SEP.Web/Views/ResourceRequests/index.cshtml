@@ -1,3 +1,31 @@
 ﻿@{
-    ViewData["Title"] = "Event Requets";
+    ViewData["Title"] = "Resources Requests";
 }
+
+<table>
+    <thead>
+        <tr>
+            <th>Department</th>
+            <th>Requested By</th>
+            <th>Requested At</th>
+            <th>Job Title</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            var resourceRequests = ViewData["ResourceRequests"] as List<ResourceRequest>;
+
+            foreach (ResourceRequest resourceRequest in resourceRequests)
+            {
+                <tr>
+                    <td><a href="/resourcerequests/@resourceRequest.Id">@resourceRequest.Department</a></td>
+                    <td>@resourceRequest.CreatedBy.Name</td>
+                    <td>@resourceRequest.CreatedAt</td>
+                    <td>@resourceRequest.JobTitle</td>
+                    <td>@resourceRequest.Status</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

@@ -4,7 +4,7 @@ namespace SEP.Web.Models
 	public enum ContractType 
 	{
 	    FullTime,
-        PartTIme
+        PartTime
 	}
 
     public enum ResourceRequestStatus
@@ -28,7 +28,7 @@ namespace SEP.Web.Models
 
 		public ContractType ContractType { get; set; }
 
-		public string RequestingDepartment { get; set; }
+		public string Department { get; set; }
 
 		public int YearsOfExperience { get; set; }
 

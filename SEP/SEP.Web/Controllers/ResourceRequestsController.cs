@@ -1,16 +1,30 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using SEP.Web.Models;
+using SEP.Web.Services;
 
 namespace SEP.Web.Controllers
 {
-	public class ResourceRequestsController: Controller
+	public class ResourceRequestsController: BaseController
     {
-		public ResourceRequestsController()
+		IResourceRequestsService _resourceRequestsService;
+
+		public IResourceRequestsService resourceRequestsService
         {
+            get
+            {
+				if (_resourceRequestsService == null)
+                {
+					_resourceRequestsService = new ResourceRequestsService(CurrentUserContext);
+                }
+
+				return _resourceRequestsService;
+            }
         }
 
 		public IActionResult Index()
 		{
+			ViewData["ResourceRequests"] = resourceRequestsService.GetResourceRequests();
 			return View();
 		}
 
@@ -20,11 +34,29 @@ namespace SEP.Web.Controllers
 			return View();
 		}
 
+        [Route("resourcerequests/create")]
+        [HttpPost]
+		public IActionResult Create(string department, ContractType contractType, int yearsOfExperience, string jobTitle, string jobDescription)
+		{
+			resourceRequestsService.CreateResourceRequest(
+				department, contractType, yearsOfExperience, jobTitle, jobDescription);
+			return Redirect("/resourcerequests");
+		}
 
-		[Route("/resourcerequests/viewdetails/{resourceRequestId}")]
-		public IActionResult ViewDetails(int resourceRequestId)
+
+		[Route("/resourcerequests/{resourceRequestId}")]
+		public IActionResult ViewDetails(string resourceRequestId)
         {
-            return View();
+			var resourceRequest = resourceRequestsService.GetResourceRequest(resourceRequestId);
+			if (resourceRequest != null) 
+			{
+				ViewData["ResourceRequest"] = resourceRequest;
+				return View();
+			}
+			else 
+			{
+				return NotFound();
+			}
         }
     }
 }
