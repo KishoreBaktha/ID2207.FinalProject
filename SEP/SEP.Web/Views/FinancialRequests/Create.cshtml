@@ -1,3 +1,24 @@
 ﻿@{
-    ViewData["Title"] = "Event Requets";
+    ViewData["Title"] = "Financial Requests";
 }
+
+<div>
+    <form method="post" asp-controller="FinancialRequests" asp-action="create">
+        <p>Requesting Department</p>
+        <input type="radio" id="admin_dept_cb" name="department" value="Administration" />
+        <label for="admin_dept_cb">Administration</label> <br />
+        <input type="radio" id="services_dept_cb" name="department" value="Services" />
+        <label for="services_dept_cb">Services</label> <br />
+        <input type="radio" id="production_dept_cb" name="department" value="Production" />
+        <label for="production_dept_cb">Production</label> <br />
+        <input type="radio" id="financial_dept_cb" name="department" value="Financial" />
+        <label for="financial_dept_cb">Financial</label> <br />
+        <p>Project Reference</p>
+        <input type="text" name="eventrequestid" /><br/>
+        <p>Required Amount</p>
+        <input type="text" name="requiredamount" />
+        <p>Reason</p>
+        <textarea name="reason"></textarea>
+        <input type="submit" value="Create">
+    </form>
+</div>

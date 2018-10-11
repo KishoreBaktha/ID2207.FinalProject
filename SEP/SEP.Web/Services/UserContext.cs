@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Http;
 using SEP.Web.Models;
 
 namespace SEP.Web.Services
@@ -12,7 +13,7 @@ namespace SEP.Web.Services
     {
         public UserContext()
         {
-        }
+        }        
 
 		public Employee CurrentUser { get; set; }
     }

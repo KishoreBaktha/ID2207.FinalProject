@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 namespace SEP.Web.Models
 {
 	public enum FinancialRequestStatus
@@ -7,15 +7,20 @@ namespace SEP.Web.Models
 		Approved,
         Rejected
 	}
+
     public class FinancialRequest
     {
         public FinancialRequest()
         {
         }
 
+		public string Id { get; set; }
+
 		public string Department { get; set; }
 
 		public Employee CreatedBy { get; set; }
+
+		public DateTime CreatedAt { get; set; }
 
 		public string EventRequestId { get; set; }
 

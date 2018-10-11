@@ -12,7 +12,6 @@ namespace SEP.Web.Models
         Pending,
         Approved,
         Rejected
-
 	}
 
     public class ResourceRequest
@@ -20,6 +19,10 @@ namespace SEP.Web.Models
         public ResourceRequest()
         {
         }
+
+		public string Id { get; set; }
+
+		public DateTime CreatedAt { get; set; }
 
 		public Employee CreatedBy { get; set; }
 

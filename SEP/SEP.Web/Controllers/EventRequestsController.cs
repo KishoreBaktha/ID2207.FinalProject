@@ -5,17 +5,22 @@ using SEP.Web.Services;
 
 namespace SEP.Web.Controllers
 {
-    public class EventRequestsController : Controller
+	public class EventRequestsController : BaseController
     {
-        IEventRequestsService eventRequestsService;
+        IEventRequestsService _eventRequestsService;
 
-        public EventRequestsController()
-        {
-			var employeeService = new EmployeeService();
-			eventRequestsService = new EventRequestsService(new UserContext {
-				CurrentUser = employeeService.GetEmployee(HttpContext.Session.GetString("username"))
-			});
-        }
+		protected IEventRequestsService eventRequestsService
+		{
+			get
+			{
+				if (_eventRequestsService == null)
+				{
+					_eventRequestsService = new EventRequestsService(CurrentUserContext);
+				}
+
+				return _eventRequestsService;
+			}
+		}
 
         public IActionResult Index()
         {

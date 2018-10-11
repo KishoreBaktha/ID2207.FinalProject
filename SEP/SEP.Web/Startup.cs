@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -9,6 +10,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SEP.Web.Handlers;
+using SEP.Web.Services;
 
 namespace SEP.Web
 {
@@ -31,6 +34,12 @@ namespace SEP.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+			// configure basic authentication 
+            //services.AddAuthentication("BasicAuthentication")
+                //.AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
+            // configure DI for application services
+            //services.AddScoped<IEmployeeService, EmployeeService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 			services.AddSession();

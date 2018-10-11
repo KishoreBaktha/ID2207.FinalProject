@@ -15,6 +15,7 @@
     <Folder Include="Views\EventRequests\" />
     <Folder Include="Views\FinancialRequests\" />
     <Folder Include="Views\ResourceRequests\" />
+    <Folder Include="Handlers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\Login\index.cshtml" />

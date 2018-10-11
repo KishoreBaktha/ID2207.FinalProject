@@ -1,3 +1,33 @@
 ﻿@{
-    ViewData["Title"] = "Event Requets";
+    ViewData["Title"] = "Resources Requests";
 }
+
+<table>
+    <thead>
+        <tr>
+            <th>Department</th>
+            <th>Requested By</th>
+            <th>Requested At</th>
+            <th>Amount</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+        var financialRequests = ViewData["FinancialRequests"] as List
+        <FinancialRequest>
+            ;
+
+            foreach (FinancialRequest financialRequest in financialRequests)
+            {
+            <tr>
+                <td><a href="/financialrequests/@financialRequest.Id">@financialRequest.Department</a></td>
+                <td>@financialRequest.CreatedBy.Name</td>
+                <td>@financialRequest.CreatedAt</td>
+                <td>@financialRequest.RequiredAmount</td>
+                <td>@financialRequest.Status</td>
+            </tr>
+            }
+            }
+    </tbody>
+</table>
