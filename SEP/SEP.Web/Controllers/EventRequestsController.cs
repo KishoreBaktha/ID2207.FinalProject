@@ -67,9 +67,28 @@ namespace SEP.Web.Controllers
 
 		[Route("/eventrequests/update")]
         [HttpPost]
-		public IActionResult Update(string id, string eventName)
+		public IActionResult Update(
+			string id, string clientName, string eventName,
+            string eventType, DateTime from, DateTime to,
+		    int attendance, string decorationDescription,
+		    string foodDescription, string filmPhotoDescription, 
+			string musicDescription, string posterDescription, 
+			string computerissue, string extrarequirement, int budget)
 		{
-			eventRequestsService.UpdateEventRequest(id, eventName);
+			eventRequestsService.UpdateEventRequest(
+				id, 
+                clientName,
+				eventName,
+				eventType, 
+				from, to,
+				attendance, decorationDescription,
+				foodDescription,
+				filmPhotoDescription,
+				musicDescription, 
+				posterDescription,
+				computerissue, 
+				extrarequirement,
+				budget);
 			return Redirect("/eventrequests");
 		}
 

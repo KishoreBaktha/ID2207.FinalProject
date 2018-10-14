@@ -16,7 +16,12 @@ namespace SEP.Web.Services
 			string eventtype, DateTime from, DateTime to,
 			int attendance, bool decoration, bool food,
 			bool filmphoto, bool music, bool poster, int budget);
-		EventRequest UpdateEventRequest(string id, string eventName);
+		EventRequest UpdateEventRequest(string id, string clientName, string eventName,
+		   string eventType, DateTime from, DateTime to,
+		   int attendance, string decorationDescription,
+		   string foodDescription, string filmPhotoDescription,
+		   string musicDescription, string posterDescription,
+            string computerissue, string extrarequirement, int budget);
 		bool ApproveEventRequest(string id);
 		bool RejectEventRequest(string id);
 	}
@@ -69,12 +74,30 @@ namespace SEP.Web.Services
 			return newEventRequest;
 		}
 
-		public EventRequest UpdateEventRequest(string id, string eventName)
+		public EventRequest UpdateEventRequest(string id, string clientName, string eventName,
+            string eventType, DateTime from, DateTime to,
+            int attendance, string decorationDescription,
+            string foodDescription, string filmPhotoDescription,
+            string musicDescription, string posterDescription,
+            string computerissue, string extrarequirement, int budget)
 		{
 			var eventRequest = GetEventRequestById(id);
 			if (eventRequest != null)
 			{
+				eventRequest.ClientName = clientName;
 				eventRequest.EventName = eventName;
+				eventRequest.EventType = eventType;
+				eventRequest.Attendance = attendance;
+				eventRequest.From = from;
+				eventRequest.To = to;
+				eventRequest.FoodDescription = foodDescription;
+				eventRequest.DecorationDescription = decorationDescription;
+				eventRequest.FilmPhotoDescription = filmPhotoDescription;
+				eventRequest.MusicDescription = musicDescription;
+				eventRequest.PosterDescription = posterDescription;
+				eventRequest.ComputerIssue = computerissue;
+				eventRequest.ExtraRequirement = extrarequirement;
+				eventRequest.ExpectedBudget = budget;
 				return eventRequest;
 			}
 			else

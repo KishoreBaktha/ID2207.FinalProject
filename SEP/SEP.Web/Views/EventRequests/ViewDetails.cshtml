@@ -8,8 +8,6 @@
     }
     <form method="post" asp-controller="EventRequests" asp-action="update">
         <input type="hidden" name="id" value="@eventRequest.Id" />
-        <p>Record Number:</p>
-        <input type="text" name="recordnumber" /> <br />
         <p>Client Name:</p>
         <input type="text" name="clientname" value="@eventRequest.ClientName" /> <br />
         <p>Event Name:</p>
@@ -24,7 +22,7 @@
         <input type="text" name="attendance" value="@eventRequest.Attendance" /> <br />
 
         <p>Budget:</p>
-        <input type="text" name="budget" /> <br />
+        <input type="text" name="budget" value="@eventRequest.ExpectedBudget"/> <br />
 
         <p>Preferences:</p>
 
