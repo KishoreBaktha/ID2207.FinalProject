@@ -6,20 +6,21 @@
     @{  var financialRequest = ViewData["FinancialRequest"] as FinancialRequest;
         var currentUser = ViewData["CurrentUser"] as Employee;
     }
-    <form method="post" asp-controller="FinancialRequests" asp-action="create">
+    <form>
+        <input type="hidden" name="id" value="@financialRequest.Id" />
         <p>Requesting Department: @financialRequest.Department</p>
 
 
-        <p>Project Reference: @financialRequest.EventRequestId</p>
+        <p>Project Reference: @financialRequest.EventRequest.EventName</p>
         <p>Required Amount: @financialRequest.RequiredAmount</p>
         <p>
             Reason <br />
             @financialRequest.Reason
         </p>
-        @{  if (currentUser.Role == EmployeeRole.FinancialManager)
+        @{  if (currentUser.Role == EmployeeRole.FinancialManager && financialRequest.Status == FinancialRequestStatus.Pending)
             { 
-                <input type="submit" value="Approve" /><br/>
-                <input type="submit" value="Reject" /><br/>  
+                <input type="submit" formaction="/financialrequests/approve" formmethod="post" value="Approve" /><br/>
+                <input type="submit" formaction="/financialrequests/reject" formmethod="post"value="Reject" /><br/>  
             }
         }
     </form>

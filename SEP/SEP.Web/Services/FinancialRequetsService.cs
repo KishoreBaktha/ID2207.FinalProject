@@ -11,6 +11,8 @@ namespace SEP.Web.Services
 		List<FinancialRequest> GetFinancialRequests();
 		FinancialRequest GetFinancialRequest(string id);
 		FinancialRequest CreateFinancialRequest(string department, string eventRequestId, int requiredAmount, string reason);
+		FinancialRequest ApproveFinancialRequest(string id);
+		FinancialRequest RejectFinancialRequest(string id);
 	}
 
 	public class FinancialRequetsService: IFinancialRequestsService
@@ -43,10 +45,16 @@ namespace SEP.Web.Services
 			int requiredAmount, 
 			string reason)
 		{
+			var eventRequest = Database.EventRequests.FirstOrDefault(x => x.Id == eventRequestId);
+
+			if (eventRequest == null)
+                throw new Exception($"Cannot find event request with ID '{eventRequestId}'");
+			
 			var newFinancialRequest = new FinancialRequest { 
 				Id = Guid.NewGuid().ToString(),
 				Department = department,
 				EventRequestId = eventRequestId,
+				EventRequest = eventRequest,
 				RequiredAmount = requiredAmount,
 				Reason = reason,
 				Status = FinancialRequestStatus.Pending,
@@ -57,5 +65,31 @@ namespace SEP.Web.Services
 			Database.FinancialRequests.Add(newFinancialRequest);
 			return newFinancialRequest;
 		}
+
+		public FinancialRequest ApproveFinancialRequest(string id)
+        {
+			var financialRequest = GetFinancialRequest(id);
+			if (financialRequest == null)
+                throw new Exception($"Cannot find financial request with '{id}'");
+
+			if (userContext.CurrentUser.Role != EmployeeRole.FinancialManager)
+                throw new Exception("Only financial manager can approve financial request");
+
+			financialRequest.Status = FinancialRequestStatus.Approved;
+			return financialRequest;
+        }
+
+		public FinancialRequest RejectFinancialRequest(string id)
+        {
+            var financialRequest = GetFinancialRequest(id);
+            if (financialRequest == null)
+                throw new Exception($"Cannot find financial request with '{id}'");
+
+            if (userContext.CurrentUser.Role != EmployeeRole.FinancialManager)
+                throw new Exception("Only financial manager can reject financial request");
+
+			financialRequest.Status = FinancialRequestStatus.Rejected;
+            return financialRequest;
+        }
     }
 }

@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Tasks";
+}
+
+<div>
+    @{  var task = ViewData["Task"] as SEP.Web.Models.Task;
+        var currentUser = ViewData["CurrentUser"] as Employee;
+    }
+    <form>
+         <input type="hidden" name="id" value="@task.Id" />
+        <p>Name: @task.Name</p>
+
+
+        <p>Project Reference: @task.EventRequest.EventName</p>
+        <p>Priority: @task.Priority</p>
+        <p>
+            Descreption: <br />
+            @task.Description
+        </p>
+        <p>Acitivity Plan</p>
+        @{ 
+
+            if (task.Status == SEP.Web.Models.TaskStatus.Assigned &&
+                currentUser.Username == task.AssignedMember.Username)
+            {                
+                <textarea name="activityplan"></textarea>
+            }
+            else
+            {
+                @task.ActivityPlan
+            }
+        }
+
+        @{  if (task.Status == SEP.Web.Models.TaskStatus.PlanSubmitted &&
+                currentUser.Username == task.CreatedBy.Username)
+            {
+                <input type="submit" formaction="/tasks/approve" formmethod="post" value="Approve" /><br />
+            }
+
+            if (task.Status == SEP.Web.Models.TaskStatus.Assigned &&
+                currentUser.Username == task.AssignedMember.Username)
+            {
+                <input type="submit" formaction="/tasks/submitplan" formmethod="post" value="Submit" /><br />
+            }
+
+            if (task.Status == SEP.Web.Models.TaskStatus.InProgress &&
+                (currentUser.Username == task.CreatedBy.Username || currentUser.Username == task.AssignedMember.Username))
+            {
+                <input type="submit" formaction="/tasks/close" formmethod="post" value="Close" /><br />
+            }
+        }
+    </form>
+</div>

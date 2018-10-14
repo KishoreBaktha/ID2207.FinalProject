@@ -1,10 +1,12 @@
 ﻿using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SEP.Web.Models;
 using SEP.Web.Services;
 
 namespace SEP.Web.Controllers
 {
+	[Authorize]
 	public class ResourceRequestsController: BaseController
     {
 		IResourceRequestsService _resourceRequestsService;

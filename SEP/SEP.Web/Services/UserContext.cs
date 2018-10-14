@@ -9,12 +9,12 @@ namespace SEP.Web.Services
 		Employee CurrentUser { get; set; }	
 	}
 
-	public class UserContext: IUserContext
-    {
-        public UserContext()
-        {
-        }        
+	public class UserContext : IUserContext
+	{
+		public UserContext()
+		{
+		}
 
-		public Employee CurrentUser { get; set; }
+		public Employee CurrentUser { get; set; }        
     }
 }

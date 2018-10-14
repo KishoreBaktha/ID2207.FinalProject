@@ -33,7 +33,6 @@ namespace SEP.Web.Services
 		public EventRequest GetEventRequestById(string eventRequestId)
 		{
 			return Database.EventRequests.FirstOrDefault(x => x.Id == eventRequestId);
-
 		}
 
 		public EventRequest CreateEventRequest(string eventname)

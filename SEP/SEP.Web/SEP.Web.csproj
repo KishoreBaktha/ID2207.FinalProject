@@ -16,6 +16,7 @@
     <Folder Include="Views\FinancialRequests\" />
     <Folder Include="Views\ResourceRequests\" />
     <Folder Include="Handlers\" />
+    <Folder Include="Views\Tasks\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\Login\index.cshtml" />
@@ -30,6 +31,9 @@
     <Content Remove="Views\FinancialRequests %28copy%29\ViewDetails.cshtml" />
     <Content Remove="Services\Create.cshtml" />
     <Content Remove="Views\EventRequests\Create.cshtml" />
+    <Content Remove="Views\Tasks\index.cshtml" />
+    <Content Remove="Views\Tasks\create.cshtml" />
+    <Content Remove="Views\Tasks\viewdetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Views\Login\index.cshtml" />
@@ -42,5 +46,11 @@
     <None Include="Views\ResourceRequests\index.cshtml" />
     <None Include="Views\ResourceRequests\ViewDetails.cshtml" />
     <None Include="Views\EventRequests\Create.cshtml" />
+    <None Include="Views\Tasks\index.cshtml" />
+    <None Include="Views\Tasks\create.cshtml" />
+    <None Include="Views\Tasks\viewdetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Services\IEmployeeService.cs" />
   </ItemGroup>
 </Project>

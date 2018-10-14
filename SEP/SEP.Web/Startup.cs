@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -10,7 +11,6 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SEP.Web.Handlers;
 using SEP.Web.Services;
 
 namespace SEP.Web
@@ -38,6 +38,14 @@ namespace SEP.Web
             //services.AddAuthentication("BasicAuthentication")
                 //.AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
+			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                    {
+                        options.AccessDeniedPath = new PathString("/login");
+                        options.LoginPath = new PathString("/login");
+                        options.SlidingExpiration = true;
+                    }); 
+
             // configure DI for application services
             //services.AddScoped<IEmployeeService, EmployeeService>();
 
@@ -61,7 +69,7 @@ namespace SEP.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-			app.UseSession();
+			app.UseAuthentication();		
 
             app.UseMvc(routes =>
             {

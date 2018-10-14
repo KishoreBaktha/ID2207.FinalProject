@@ -15,11 +15,19 @@ namespace SEP.Web.Models
         {
         }
 
+		public string Id { get; set; }
+
+		public string Name { get; set; }
+
 		public Employee CreatedBy { get; set; }
+
+		public DateTime CreatedAt { get; set; }
 
 		public Employee AssignedMember { get; set; }
 
 		public string EventRequestId { get; set; }
+
+		public EventRequest EventRequest { get; set; }
 
 		public string Priority { get; set; }
 

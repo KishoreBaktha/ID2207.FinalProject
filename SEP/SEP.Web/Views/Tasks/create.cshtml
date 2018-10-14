@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Tasks";
+}
+
+
+<div>
+    <form method="post" asp-controller="Tasks" asp-action="create">       
+        <p>Project Reference</p>
+        <select name="eventrequestid">
+        @{  var events = ViewData["EventRequests"] as List<EventRequest>;
+            foreach (var eventRequest in events)
+            { 
+                <option value="@eventRequest.Id">@eventRequest.EventName</option>
+            }
+        }
+        </select> <br/>
+        <p>Name</p>
+        <input type="text" name="name" />
+        <p>Description</p>
+        <textarea name="description"></textarea>
+        <p>Assign to</p>
+        <select name="assignedto">
+        @{  var members = ViewData["DepartmentMembers"] as List<Employee>;
+            foreach (var member in members)
+            { 
+                <option value="@member.Username">@member.Name</option>
+            }
+        }
+        </select>
+        <p>Priority</p>
+        <select name="priority">
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+        </select> <br/>
+        <input type="submit" value="Create">
+    </form>
+</div>

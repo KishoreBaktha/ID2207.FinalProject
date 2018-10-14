@@ -1,10 +1,13 @@
 ﻿using System;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SEP.Web.Services;
 
 namespace SEP.Web.Controllers
 {
+	[Authorize]
 	public class EventRequestsController : BaseController
     {
         IEventRequestsService _eventRequestsService;

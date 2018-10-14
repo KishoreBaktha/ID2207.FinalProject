@@ -2,9 +2,17 @@
 using SEP.Web.Models;
 using SEP.Web.Repositories;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace SEP.Web.Services
 {
+	public interface IEmployeeService
+    {
+        Employee GetEmployee(string username);
+        List<Employee> GetEmployeesByRole(EmployeeRole role);
+        Employee ValidateCredential(string username, string password);
+    }
+
 	public class EmployeeService: IEmployeeService
     {
         public EmployeeService()
@@ -25,8 +33,11 @@ namespace SEP.Web.Services
 			return Database
                 .Employees
                 .FirstOrDefault(e =>
-                                e.Username == username);
-            
+                                e.Username == username);            
+		}
+		public List<Employee> GetEmployeesByRole(EmployeeRole role)
+		{
+			return Database.Employees.Where(x => x.Role == role).ToList();
 		}
     }
 }

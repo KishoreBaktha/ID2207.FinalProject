@@ -24,6 +24,8 @@ namespace SEP.Web.Models
 
 		public string EventRequestId { get; set; }
 
+		public EventRequest EventRequest { get; set; }
+
 		public int RequiredAmount { get; set; }
 
 		public string Reason { get; set; }

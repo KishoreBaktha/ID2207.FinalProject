@@ -14,7 +14,14 @@
         <input type="radio" id="financial_dept_cb" name="department" value="Financial" />
         <label for="financial_dept_cb">Financial</label> <br />
         <p>Project Reference</p>
-        <input type="text" name="eventrequestid" /><br/>
+        <select name="eventrequestid">
+        @{  var events = ViewData["EventRequests"] as List<EventRequest>;
+            foreach (var eventRequest in events)
+            { 
+                <option value="@eventRequest.Id">@eventRequest.EventName</option>
+            }
+        }
+        </select> <br/>
         <p>Required Amount</p>
         <input type="text" name="requiredamount" />
         <p>Reason</p>

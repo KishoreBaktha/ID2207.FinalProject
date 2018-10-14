@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SEP.Web.Services;
@@ -18,9 +19,9 @@ namespace SEP.Web.Controllers
 					var employeeService = new EmployeeService();
 					_userContext = new UserContext
 					{
-						CurrentUser = employeeService.GetEmployee(HttpContext.Session.GetString("username"))
+						CurrentUser = employeeService.GetEmployee(HttpContext.User.Identity.Name)
 					};
-					ViewData["CurrentUser"] = _userContext.CurrentUser;
+					ViewData["CurrentUser"] = _userContext.CurrentUser;                   
 				}
                 
 				return _userContext;
