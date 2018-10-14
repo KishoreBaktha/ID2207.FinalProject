@@ -28,8 +28,19 @@
                     </button>
                     <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand" style="color: #fff">Swedish Events Planning</a>
                 </div>
-                <div class="navbar-collapse collapse">                    
-                </div>
+                @{  var currentUser = ViewData["CurrentUser"] as Employee;
+                    if(currentUser != null)
+                    {
+                        <div style="float: right; color: #fff; margin-top: 3px">
+                             <span title="@currentUser.Role" style="font-size: 16px">
+                                 @currentUser.Name (<a href="/logout" style="color: #fff">Logout</a>)
+                            </span> <br/>
+                            <span>
+                                @currentUser.Department Department
+                            </span>
+                        </div>
+                    }
+                }
             </div>
 
         </nav>
@@ -40,7 +51,7 @@
             @RenderBody()
             <hr />
             <footer>
-                <p>&copy; 2018 - SEP.Web</p>
+                <p>&copy; 2018 - SEP</p>
             </footer>
         </div>
 
