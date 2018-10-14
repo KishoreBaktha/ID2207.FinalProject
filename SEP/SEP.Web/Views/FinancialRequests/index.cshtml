@@ -2,6 +2,15 @@
     ViewData["Title"] = "Financial Requests";
 }
 
+@{ 
+    var currentUser = ViewData["CurrentUser"] as Employee;
+    if (currentUser.Role == EmployeeRole.AdministrationManager || 
+        currentUser.Role == EmployeeRole.ProducitonManager ||
+        currentUser.Role == EmployeeRole.ServicesManager)
+    { 
+        <a href="/financialrequests/create">Create Financial Request</a> <br/>
+    }
+}
 <table>
     <thead>
         <tr>

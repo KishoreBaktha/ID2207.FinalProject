@@ -3,11 +3,16 @@
 }
 
 <div>
-    <form method="post" asp-controller="EventRequests" asp-action="create">
-        <p>Record Number:</p>
-        <input type="text" name="recordnumber" /> <br />
+    <form method="post" asp-controller="EventRequests" asp-action="create">       
         <p>Client Name:</p>
-        <input type="text" name="clientname" /> <br />
+        <select name="clientname">
+        @{  var clients = ViewData["Clients"] as List<string>;
+            foreach (var client in clients)
+            { 
+              <option value="@client">@client</option>
+            }
+        }
+        </select> <br/>
         <p>Event Name:</p>
         <input type="text" name="eventname" /> <br />
         <p>Event Type:</p>

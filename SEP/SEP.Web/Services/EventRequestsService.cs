@@ -10,7 +10,12 @@ namespace SEP.Web.Services
 	{
 		List<EventRequest> GetEventRequests();
 		EventRequest GetEventRequestById(string eventRequestId);
-		EventRequest CreateEventRequest(string eventname);
+		EventRequest CreateEventRequest(
+			string clientname,
+			string eventname,
+			string eventtype, DateTime from, DateTime to,
+			int attendance, bool decoration, bool food,
+			bool filmphoto, bool music, bool poster, int budget);
 		EventRequest UpdateEventRequest(string id, string eventName);
 		bool ApproveEventRequest(string id);
 		bool RejectEventRequest(string id);
@@ -35,12 +40,29 @@ namespace SEP.Web.Services
 			return Database.EventRequests.FirstOrDefault(x => x.Id == eventRequestId);
 		}
 
-		public EventRequest CreateEventRequest(string eventname)
+		public EventRequest CreateEventRequest(
+			string clientname,
+			string eventname,
+		    string eventtype, DateTime from, DateTime to, 
+			int attendance, bool decoration, bool food, 
+			bool filmphoto, bool music, bool poster, int budget)
 		{
 			var newEventRequest = new EventRequest
 			{
 				Id = Guid.NewGuid().ToString(),
-				EventName = eventname
+				ClientName = clientname,
+				EventName = eventname,
+				EventType = eventtype,
+                From = from,
+                To = to,
+				Attendance =attendance,
+				Decoration = decoration,
+                Food = food,
+				FilmPhoto = filmphoto, 
+				Music = music,
+				Poster = poster,
+				ExpectedBudget = budget,
+				EventStatus = EventStatus.PendingApprovalFromSeniorCSO
 			};
 
 			Database.EventRequests.Add(newEventRequest);

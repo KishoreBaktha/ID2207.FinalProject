@@ -6,7 +6,8 @@
     @{  var resourceRequest = ViewData["ResourceRequest"] as ResourceRequest;
     var currentUser = ViewData["CurrentUser"] as Employee;
     }
-    <form method="post" asp-controller="FinancialRequests" asp-action="create">
+    <form>
+        <input type="hidden" name="id" value="@resourceRequest.Id" />
         <p>Requesting Department: @resourceRequest.Department</p>
 
         <p>Contract Type: @resourceRequest.ContractType.ToString()</p>
@@ -16,11 +17,11 @@
             Job Description <br />
             @resourceRequest.JobDescription
         </p>
-        @{  if (currentUser.Role == EmployeeRole.HRManager)
-        {
-        <input type="submit" value="Approve" /><br />
-        <input type="submit" value="Reject" /><br />
-        }
+        @{  if (currentUser.Role == EmployeeRole.HRManager && resourceRequest.Status == ResourceRequestStatus.Pending)
+            {
+                <input type="submit" formaction="/resourcerequests/approve" formmethod="post" value="Approve" /><br />
+                <input type="submit" formaction="/resourcerequests/reject" formmethod="post"value="Reject" /><br />
+            }
         }
     </form>
 </div>

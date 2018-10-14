@@ -1,7 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Event Requests";
 }
-
+@{ 
+    var currentUser = ViewData["CurrentUser"] as Employee;
+    if (currentUser.Role == EmployeeRole.CustomerService || currentUser.Role == EmployeeRole.SeniorCustomerService)
+    { 
+        <a href="/eventrequests/create">Create Event Request</a> <br/>
+    }
+}
 <table>
     <thead>
         <tr>
@@ -12,8 +18,7 @@
         </tr>
     </thead>
     <tbody>
-        @{   
-            var eventRequests = ViewData["EventRequests"] as List<EventRequest>;
+        @{          var eventRequests = ViewData["EventRequests"] as List<EventRequest>;
 
             foreach (EventRequest eventRequest in eventRequests)
             {

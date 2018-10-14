@@ -2,6 +2,14 @@
     ViewData["Title"] = "Tasks";
 }
 
+@{ 
+    var currentUser = ViewData["CurrentUser"] as Employee;
+    if (currentUser.Role == EmployeeRole.ProducitonManager ||
+        currentUser.Role == EmployeeRole.ServicesManager)
+    { 
+        <a href="/tasks/create">Create Task</a> <br/>
+    }
+}
 
 <table>
     <thead>

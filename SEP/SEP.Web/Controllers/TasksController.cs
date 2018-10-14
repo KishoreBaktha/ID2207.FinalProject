@@ -27,6 +27,7 @@ namespace SEP.Web.Controllers
               
 		public IActionResult Index()
 		{
+			ViewData["CurrentUser"] = CurrentUserContext.CurrentUser;
 			ViewData["Tasks"] = tasksService.GetTasksForCurrentUser();
 			return View();
 		}
@@ -34,6 +35,7 @@ namespace SEP.Web.Controllers
 		[Route("/tasks/create")]
 		public IActionResult Create()
 		{
+			ViewData["CurrentUser"] = CurrentUserContext.CurrentUser;
 			ViewData["DepartmentMembers"] = GetDepartmentMembers();
 			ViewData["EventRequests"] = GetEventRequests();
 			return View();
@@ -51,6 +53,7 @@ namespace SEP.Web.Controllers
 		[Route("/tasks/{taskId}")]
         public IActionResult ViewDetails(string taskId)
         {
+			ViewData["CurrentUser"] = CurrentUserContext.CurrentUser;
 			var task = tasksService.GetTaskById(taskId);
 
 			if (task == null)

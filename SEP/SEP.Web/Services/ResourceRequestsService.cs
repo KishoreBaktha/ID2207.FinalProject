@@ -17,6 +17,8 @@ namespace SEP.Web.Services
 
 		List<ResourceRequest> GetResourceRequests();
 		ResourceRequest GetResourceRequest(string id);
+		ResourceRequest ApproveResourceRequest(string id);
+		ResourceRequest RejectResourceRequest(string id);
 	}
 
 	public class ResourceRequestsService: IResourceRequestsService
@@ -65,5 +67,31 @@ namespace SEP.Web.Services
 			Database.ResourceRequests.Add(newResourceRequest);
 			return newResourceRequest;
 		}
+
+		public ResourceRequest ApproveResourceRequest(string id)
+		{
+			var resourceRequest = GetResourceRequest(id);
+			if (resourceRequest == null)
+                throw new Exception($"Cannot find resource request with '{id}'");
+
+			if (userContext.CurrentUser.Role != EmployeeRole.HRManager)
+                throw new Exception("Only HR manager can approve resource request");
+
+			resourceRequest.Status = ResourceRequestStatus.Approved;
+			return resourceRequest;
+		}
+
+		public ResourceRequest RejectResourceRequest(string id)
+        {
+            var resourceRequest = GetResourceRequest(id);
+            if (resourceRequest == null)
+                throw new Exception($"Cannot find resource request with '{id}'");
+
+            if (userContext.CurrentUser.Role != EmployeeRole.HRManager)
+                throw new Exception("Only HR manager can reject resource request");
+
+			resourceRequest.Status = ResourceRequestStatus.Rejected;
+            return resourceRequest;
+        }
     }
 }

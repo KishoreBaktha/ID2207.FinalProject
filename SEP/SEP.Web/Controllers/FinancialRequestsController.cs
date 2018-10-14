@@ -28,6 +28,7 @@ namespace SEP.Web.Controllers
 
 		public IActionResult Index()
 		{
+			ViewData["CurrentUser"] = CurrentUserContext.CurrentUser;
 			ViewData["FinancialRequests"] = financialRequestsService.GetFinancialRequests();
 			return View();
 		}
@@ -35,6 +36,7 @@ namespace SEP.Web.Controllers
 		[Route("/financialrequests/create")]
 		public IActionResult Create()
 		{			
+			ViewData["CurrentUser"] = CurrentUserContext.CurrentUser;
 			ViewData["EventRequests"] = GetEventRequests();
 			return View();
 		}
@@ -43,6 +45,7 @@ namespace SEP.Web.Controllers
         [HttpPost]
         public IActionResult Create(string department, string eventRequestId, int requiredAmount, string reason)
 		{
+			ViewData["CurrentUser"] = CurrentUserContext.CurrentUser;
 			financialRequestsService.CreateFinancialRequest(department, eventRequestId, requiredAmount, reason);
 			return Redirect("/financialrequests");
 		}
@@ -51,6 +54,7 @@ namespace SEP.Web.Controllers
 		[Route("/financialrequests/{financialRequestId}")]
 		public IActionResult ViewDetails(string financialRequestId)
         {
+			ViewData["CurrentUser"] = CurrentUserContext.CurrentUser;
 			var financialRequest = financialRequestsService.GetFinancialRequest(financialRequestId);
 			if (financialRequest == null)
 			{
@@ -65,6 +69,7 @@ namespace SEP.Web.Controllers
         [HttpPost]
 		public IActionResult ApproveFinancialRequest(string id)
 		{
+			ViewData["CurrentUser"] = CurrentUserContext.CurrentUser;
 			financialRequestsService.ApproveFinancialRequest(id);
 			return Redirect("/financialrequests");
 		}
@@ -73,12 +78,14 @@ namespace SEP.Web.Controllers
         [HttpPost]
         public IActionResult RejectFinancialRequest(string id)
         {
+			ViewData["CurrentUser"] = CurrentUserContext.CurrentUser;
             financialRequestsService.RejectFinancialRequest(id);
             return Redirect("/financialrequests");
         }
 
 		List<EventRequest> GetEventRequests()
         {
+			ViewData["CurrentUser"] = CurrentUserContext.CurrentUser;
             var eventRequestsService = new EventRequestsService(CurrentUserContext);
             return eventRequestsService.GetEventRequests();
         }

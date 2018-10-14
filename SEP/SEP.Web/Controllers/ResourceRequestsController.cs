@@ -26,6 +26,7 @@ namespace SEP.Web.Controllers
 
 		public IActionResult Index()
 		{
+			ViewData["CurrentUser"] = CurrentUserContext.CurrentUser;
 			ViewData["ResourceRequests"] = resourceRequestsService.GetResourceRequests();
 			return View();
 		}
@@ -33,13 +34,14 @@ namespace SEP.Web.Controllers
 		[Route("/resourcerequests/create")]
 		public IActionResult Create()
 		{
+			ViewData["CurrentUser"] = CurrentUserContext.CurrentUser;
 			return View();
 		}
 
         [Route("resourcerequests/create")]
         [HttpPost]
 		public IActionResult Create(string department, ContractType contractType, int yearsOfExperience, string jobTitle, string jobDescription)
-		{
+		{			
 			resourceRequestsService.CreateResourceRequest(
 				department, contractType, yearsOfExperience, jobTitle, jobDescription);
 			return Redirect("/resourcerequests");
@@ -49,6 +51,7 @@ namespace SEP.Web.Controllers
 		[Route("/resourcerequests/{resourceRequestId}")]
 		public IActionResult ViewDetails(string resourceRequestId)
         {
+			ViewData["CurrentUser"] = CurrentUserContext.CurrentUser;
 			var resourceRequest = resourceRequestsService.GetResourceRequest(resourceRequestId);
 			if (resourceRequest != null) 
 			{
@@ -60,5 +63,21 @@ namespace SEP.Web.Controllers
 				return NotFound();
 			}
         }
+
+        [Route("/resourcerequests/approve")]
+		[HttpPost]
+		public IActionResult Approve(string id)
+		{
+			resourceRequestsService.ApproveResourceRequest(id);
+			return Redirect("/resourcerequests");
+		}
+
+		[Route("/resourcerequests/reject")]
+        [HttpPost]
+		public IActionResult Reject(string id)
+		{
+			resourceRequestsService.RejectResourceRequest(id);
+            return Redirect("/resourcerequests");
+		}
     }
 }

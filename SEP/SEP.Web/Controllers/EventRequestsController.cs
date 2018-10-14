@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -28,22 +29,40 @@ namespace SEP.Web.Controllers
         public IActionResult Index()
         {
 			ViewData["EventRequests"] = eventRequestsService.GetEventRequests();
+			ViewData["CurrentUser"] = CurrentUserContext.CurrentUser;
             return View();
         }
 
         [Route("/eventrequests/create")]
         public IActionResult Create()
         {
+			ViewData["CurrentUser"] = CurrentUserContext.CurrentUser;
+			ViewData["Clients"] = new List<string> { 
+				"Company A",
+                "Company B",
+                "Company C"
+			};
             return View();
         }
 
         [Route("/eventrequests/create")]
         [HttpPost]
-        public IActionResult Create(string eventname)
+        public IActionResult Create(
+			string clientname, 
+			string eventname, 
+			string eventtype, 
+			DateTime from, 
+			DateTime to, 
+			int attendance, 
+		    bool decoration,bool food, bool filmphoto, bool music, bool poster, int budget)
         {
-            eventRequestsService.CreateEventRequest(eventname);
+			eventRequestsService.CreateEventRequest(
+				clientname, eventname, eventtype, 
+				from, to, attendance, 
+				decoration, food, filmphoto, music, poster, 
+				budget);
+			
 			return Redirect("/eventrequests");
-
         }
 
 		[Route("/eventrequests/update")]
@@ -57,17 +76,13 @@ namespace SEP.Web.Controllers
         [Route("/eventrequests/{eventRequestId}")]
         public IActionResult ViewDetails(string eventRequestId)
         {
+			ViewData["CurrentUser"] = CurrentUserContext.CurrentUser;
 			var eventRequest = eventRequestsService.GetEventRequestById(eventRequestId);
 			if (eventRequest == null)
-			{
-				// return 404 or something
-				return Ok();
-			}
-			else 
-			{
-				ViewData["EventRequest"] = eventRequest;
-				return View();
-			}            
+				return NotFound();
+
+			ViewData["EventRequest"] = eventRequest;
+			return View();
         }
     }
 }
