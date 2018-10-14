@@ -14,6 +14,7 @@ namespace SEP.Web.Controllers
     {
         public IActionResult Index()
         {
+			ViewData["CurrentUser"] = CurrentUserContext.CurrentUser;
             return View();
         }              
 

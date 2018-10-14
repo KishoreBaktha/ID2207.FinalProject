@@ -1,3 +1,59 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<style>
+    .homepage-link {
+        display: inline-block;
+        text-align: center;
+        padding: 50px 20px;
+        width: 200px;
+        color: #fff;
+        font-size: 24px;
+        background-color: rgb(20, 106, 167);
+    }
+    .homepage-link:hover {
+        color: #fff;
+        background-color: rgb(254, 204, 0);
+        text-decoration: none;
+    }
+</style>
+<div style="margin-top: 30px">
+    @{
+    var currentUser = ViewData["CurrentUser"] as Employee;
+
+    if (currentUser.Role == EmployeeRole.CustomerService ||
+       currentUser.Role == EmployeeRole.SeniorCustomerService ||
+       currentUser.Role == EmployeeRole.AdministrationManager ||
+       currentUser.Role == EmployeeRole.ProducitonManager ||
+       currentUser.Role == EmployeeRole.ServicesManager ||
+       currentUser.Role == EmployeeRole.FinancialManager)
+    {
+        <a href="/eventrequests" class="homepage-link">Event Requests</a>
+    }
+
+    if (currentUser.Role == EmployeeRole.HRManager ||
+       currentUser.Role == EmployeeRole.FinancialManager ||
+       currentUser.Role == EmployeeRole.AdministrationManager ||
+       currentUser.Role == EmployeeRole.ProducitonManager ||
+       currentUser.Role == EmployeeRole.ServicesManager)
+    {
+        <a href="/resourcerequests" class="homepage-link">Resource Requests</a>
+    }
+
+    if (currentUser.Role == EmployeeRole.FinancialManager ||
+       currentUser.Role == EmployeeRole.AdministrationManager ||
+       currentUser.Role == EmployeeRole.ProducitonManager ||
+       currentUser.Role == EmployeeRole.ServicesManager)
+    {
+        <a href="/financialrequests" class="homepage-link">Financial Requests</a>
+    }
+
+    if (currentUser.Role == EmployeeRole.ProducitonManager ||
+       currentUser.Role == EmployeeRole.ServicesManager ||
+       currentUser.Role == EmployeeRole.ProductionSubTeam ||
+       currentUser.Role == EmployeeRole.ServiceSubTeam)
+    {
+        <a href="/tasks" class="homepage-link">Tasks Management</a>
+    }
+}
+</div>
